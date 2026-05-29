@@ -1,0 +1,111 @@
+{
+  "themeScopes": [
+    {
+      "name": "light",
+      "className": "light"
+    },
+    {
+      "name": "dark",
+      "className": "dark"
+    }
+  ],
+  "tokenDefs": [
+    {
+      "id": "color.accent",
+      "cssVar": "--color-accent",
+      "type": "color",
+      "group": "color.accent"
+    },
+    {
+      "id": "color.accent.text",
+      "cssVar": "--color-accent-text",
+      "type": "color",
+      "group": "color.accent"
+    },
+    {
+      "id": "color.bg.base",
+      "cssVar": "--color-bg-base",
+      "type": "color",
+      "group": "color.bg"
+    },
+    {
+      "id": "color.bg.card",
+      "cssVar": "--color-bg-card",
+      "type": "color",
+      "group": "color.bg"
+    },
+    {
+      "id": "color.bg.elevated",
+      "cssVar": "--color-bg-elevated",
+      "type": "color",
+      "group": "color.bg"
+    },
+    {
+      "id": "color.border.subtle",
+      "cssVar": "--color-border-subtle",
+      "type": "color",
+      "group": "color.border"
+    },
+    {
+      "id": "color.text.faint",
+      "cssVar": "--color-text-faint",
+      "type": "color",
+      "group": "color.text"
+    },
+    {
+      "id": "color.text.muted",
+      "cssVar": "--color-text-muted",
+      "type": "color",
+      "group": "color.text"
+    },
+    {
+      "id": "color.text.primary",
+      "cssVar": "--color-text-primary",
+      "type": "color",
+      "group": "color.text"
+    },
+    {
+      "id": "color.text.secondary",
+      "cssVar": "--color-text-secondary",
+      "type": "color",
+      "group": "color.text"
+    },
+    {
+      "id": "radius.lg",
+      "cssVar": "--radius-lg",
+      "type": "dimension",
+      "group": "radius"
+    },
+    {
+      "id": "radius.md",
+      "cssVar": "--radius-md",
+      "type": "dimension",
+      "group": "radius"
+    },
+    {
+      "id": "space.2",
+      "cssVar": "--space-2",
+      "type": "dimension",
+      "group": "space"
+    },
+    {
+      "id": "space.4",
+      "cssVar": "--space-4",
+      "type": "dimension",
+      "group": "space"
+    }
+  ],
+  "contrast": {
+    "text": [
+      "color.text.faint",
+      "color.text.muted",
+      "color.text.primary",
+      "color.text.secondary"
+    ],
+    "surfaces": [
+      "color.bg.base",
+      "color.bg.card",
+      "color.bg.elevated"
+    ]
+  }
+}
