@@ -1,0 +1,5 @@
+{
+  "bg": { "$type": "color", "base": { "$value": "#000000" } },
+  "text": { "$type": "color", "primary": { "$value": "#ff0000" } },
+  "accent": { "$type": "color", "default": { "$value": "#3300ff" } }
+}

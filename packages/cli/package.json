@@ -1,0 +1,15 @@
+{
+  "name": "@agentic-design-audit/cli",
+  "version": "0.1.0",
+  "description": "CLI for design-system drift: diff code tokens (CSS) against DTCG / Style Dictionary token files. CI-friendly.",
+  "type": "module",
+  "bin": { "design-audit": "src/cli.js" },
+  "main": "src/drift.js",
+  "exports": { ".": "./src/drift.js" },
+  "files": ["src"],
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {
+    "@agentic-design-audit/core": "0.1.0"
+  }
+}

@@ -1,0 +1,6 @@
+:root, .dark {
+  --color-bg-base: #000000;
+  --color-text-primary: #ffffff;
+  --color-accent: #3300ff;
+  --space-4: 1rem;
+}

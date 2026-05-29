@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspace=@agentic-design-audit/core --workspace=@agentic-design-audit/react",
-    "test": "node --test packages/core/test"
+    "test": "npm run build --workspace=@agentic-design-audit/core && node --test packages/core/test packages/cli/test"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

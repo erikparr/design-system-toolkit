@@ -13,7 +13,18 @@ Everything flows through one normalized model (`Token` / `TokenSet` / `Component
 |---|---|---|
 | [`@agentic-design-audit/core`](packages/core) | The engine: model, color/contrast math, diff, code adapter. Framework-pure, zero runtime deps. | none |
 | [`@agentic-design-audit/react`](packages/react) | Config-driven `<DesignAudit>` + `useTokens` hook for React/Tailwind apps. | react, core |
+| [`@agentic-design-audit/cli`](packages/cli) | `design-audit drift` — diff code (CSS) tokens against DTCG/Style Dictionary files. CI-friendly (non-zero exit on drift). | core |
 | [`skill/`](skill) | A Claude Skill that detects a repo's framework, extracts its tokens to config, mounts the audit route, and verifies. | — |
+
+## Drift CLI
+
+```bash
+design-audit drift --css src/app/globals.css \
+  --tokens dark=tokens/dark.json --tokens light=tokens/light.json \
+  --primitives tokens/primitives.json
+```
+
+Exits non-zero on a `value-mismatch` (genuine disagreement); `--strict` also gates on `missing`/`extra` (coverage/naming). `--json` for pipelines, `--authority code|tokens` to choose the source of truth.
 
 ## Scope
 
