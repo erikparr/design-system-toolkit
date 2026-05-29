@@ -23,8 +23,8 @@ Everything flows through one normalized model (`Token` / `TokenSet` / `Component
 
 Each phase is one adapter into the same engine:
 
-- **v1 — code adapter** (now): live token values via `getComputedStyle`, contrast, legacy flags.
-- **v2 — Style Dictionary / DTCG adapter**: file-based `.tokens.json` ↔ code drift.
+- **v1 — code adapter** ✅: live token values via `getComputedStyle` (browser) + `cssStatic` (headless), contrast, legacy flags.
+- **v2 — Style Dictionary / DTCG adapter** ✅ (engine): `dtcgToTokenSet` parses `.tokens.json` ($type inheritance, aliases, alpha hex) → `diffTokenSets` reports cross-source drift. Next: a drift report surface/skill workflow.
 - **v3 — Figma adapter**: variables via MCP/REST + Code Connect for component↔code mapping.
 - **v4 — Storybook adapter**: which components/variants are actually exercised.
 

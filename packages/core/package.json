@@ -6,13 +6,15 @@
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./adapters/code": "./dist/adapters/code.js"
+    "./adapters/code": "./dist/adapters/code.js",
+    "./adapters/cssStatic": "./dist/adapters/cssStatic.js",
+    "./adapters/dtcg": "./dist/adapters/dtcg.js"
   },
   "files": ["dist", "src"],
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "build": "esbuild src/index.js src/adapters/code.js --bundle --format=esm --platform=neutral --outdir=dist",
+    "build": "esbuild src/index.js src/adapters/code.js src/adapters/cssStatic.js src/adapters/dtcg.js --bundle --format=esm --platform=neutral --outdir=dist",
     "prepack": "npm run build"
   }
 }

@@ -24,20 +24,22 @@ export function parseColor(input) {
   }
 
   var hex = str.replace('#', '')
-  if (/^[0-9a-f]{3}$/.test(hex)) {
+  // #rgb / #rgba (shorthand — each nibble doubled)
+  if (/^[0-9a-f]{3,4}$/.test(hex)) {
     return {
       r: parseInt(hex[0] + hex[0], 16),
       g: parseInt(hex[1] + hex[1], 16),
       b: parseInt(hex[2] + hex[2], 16),
-      a: 1,
+      a: hex.length === 4 ? parseInt(hex[3] + hex[3], 16) / 255 : 1,
     }
   }
-  if (/^[0-9a-f]{6}$/.test(hex)) {
+  // #rrggbb / #rrggbbaa
+  if (/^[0-9a-f]{6}([0-9a-f]{2})?$/.test(hex)) {
     return {
       r: parseInt(hex.slice(0, 2), 16),
       g: parseInt(hex.slice(2, 4), 16),
       b: parseInt(hex.slice(4, 6), 16),
-      a: 1,
+      a: hex.length === 8 ? parseInt(hex.slice(6, 8), 16) / 255 : 1,
     }
   }
   return null
