@@ -71,6 +71,18 @@
       "group": "color.text"
     },
     {
+      "id": "font.mono",
+      "cssVar": "--font-mono",
+      "type": "fontFamily",
+      "group": "font"
+    },
+    {
+      "id": "font.sans",
+      "cssVar": "--font-sans",
+      "type": "fontFamily",
+      "group": "font"
+    },
+    {
       "id": "radius.lg",
       "cssVar": "--radius-lg",
       "type": "dimension",
@@ -83,6 +95,18 @@
       "group": "radius"
     },
     {
+      "id": "shadow.md",
+      "cssVar": "--shadow-md",
+      "type": "shadow",
+      "group": "shadow"
+    },
+    {
+      "id": "shadow.sm",
+      "cssVar": "--shadow-sm",
+      "type": "shadow",
+      "group": "shadow"
+    },
+    {
       "id": "space.2",
       "cssVar": "--space-2",
       "type": "dimension",
@@ -93,6 +117,24 @@
       "cssVar": "--space-4",
       "type": "dimension",
       "group": "space"
+    },
+    {
+      "id": "space.8",
+      "cssVar": "--space-8",
+      "type": "dimension",
+      "group": "space"
+    },
+    {
+      "id": "transition.default",
+      "cssVar": "--transition-default",
+      "type": "duration",
+      "group": "transition"
+    },
+    {
+      "id": "transition.fast",
+      "cssVar": "--transition-fast",
+      "type": "duration",
+      "group": "transition"
     }
   ],
   "contrast": {

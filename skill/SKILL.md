@@ -46,7 +46,12 @@ It emits `{ themeScopes, tokenDefs, contrast }`. `tokenDefs` are derived from cu
   :root, .dark, [data-theme="dark"] { /* …dark tokens… */ }
   ```
   Then ensure the dark `themeScope` uses the matching `className`/`attributes`.
-- **Legacy palette (optional):** if Tailwind config defines a superseded palette (e.g. `studio-*`), add a `legacy: [{ className, value, note }]` array to the config to flag it for removal. The extractor does not parse JS config.
+- **Optional enrichments (not derivable from CSS variables).** Add these to the config by hand when the project has them — sections render only when their data is present:
+  - `typography: { scale, weights, letterSpacing }` — type scale/weights usually live in a Tailwind config, not CSS variables. `scale` items are `{ label, value }` (a CSS font-size). Font *families* are auto-detected from `--font-*` tokens; these three are the extras.
+  - `components: [{ label, items: [{ label, className, tag? }] }]` — project component classes (e.g. `.btn`, `.card`) rendered live in both themes. `tag` defaults to `button`.
+  - `legacy: [{ className, value, note }]` — superseded palette (e.g. Tailwind `studio-*`) flagged for removal. The extractor does not parse JS config, so add these manually.
+
+  Keep the generated `tokenDefs`/`contrast` in the JSON file; merge enrichments separately (see `examples/vite-react/src/enrichments.js` + `main.jsx`) so regenerating tokens never clobbers them.
 
 ### 4. Mount the route
 
@@ -80,6 +85,16 @@ Run a validator loop — fix and repeat until all pass:
     { "id": "color.bg.card", "cssVar": "--color-bg-card", "type": "color", "group": "color.bg" }
   ],
   "contrast": { "text": ["color.text.primary"], "surfaces": ["color.bg.base"] },
+
+  // --- optional enrichments (added by hand; merged over the generated config) ---
+  "typography": {
+    "scale": [{ "label": "lg", "value": "1.25rem" }],
+    "weights": [{ "label": "bold", "weight": 700 }],
+    "letterSpacing": [{ "label": "wide", "value": "0.05em" }]
+  },
+  "components": [
+    { "label": ".btn", "items": [{ "label": "Primary", "className": "btn" }] }
+  ],
   "legacy": [ { "className": "studio-black", "value": "#ffffff", "note": "named black, renders white" } ]
 }
 ```
