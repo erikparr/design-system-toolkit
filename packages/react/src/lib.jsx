@@ -18,7 +18,11 @@ export function ThemeBox(props) {
       {...scopeProps(props.scope)}
       style={Object.assign(
         {
+          // A themed surface MUST pair foreground with background from the same
+          // theme — otherwise text inherits the outer page's color and the
+          // off-theme column renders unreadable (e.g. dark text on dark bg).
           backgroundColor: 'var(--color-bg-base, #fff)',
+          color: 'var(--color-text-primary, #111)',
           border: '1px solid var(--color-border-subtle, #ddd)',
           borderRadius: '8px',
           padding: '12px',

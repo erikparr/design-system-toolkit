@@ -35,7 +35,7 @@ export function ColorsSection(props) {
                     {config.themeScopes.map(function (scope) {
                       return (
                         <ThemeBox key={scope.name} scope={scope} style={{ padding: '8px' }} label={false}>
-                          <div style={{ height: '36px', borderRadius: '4px', backgroundColor: 'var(' + def.cssVar + ')', border: '1px solid var(--color-border-subtle, #ddd)' }} />
+                          <div style={{ height: '36px', borderRadius: '4px', backgroundColor: 'var(' + def.cssVar + ')', border: '1px solid var(--color-border-strong, #888)' }} />
                           <div style={{ fontFamily: 'monospace', fontSize: '11px', opacity: 0.7, marginTop: '6px' }}>
                             {liveValue(byTheme, scope.name, def.id)}
                           </div>
