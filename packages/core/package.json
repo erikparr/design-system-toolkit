@@ -1,5 +1,5 @@
 {
-  "name": "@design-audit/core",
+  "name": "@agentic-design-audit/core",
   "version": "0.1.0",
   "description": "Framework-pure engine for design-system auditing: normalized token model, WCAG contrast, drift diff, and a browser code adapter.",
   "type": "module",

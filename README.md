@@ -11,8 +11,8 @@ Everything flows through one normalized model (`Token` / `TokenSet` / `Component
 
 | Package | What it is | Deps |
 |---|---|---|
-| [`@design-audit/core`](packages/core) | The engine: model, color/contrast math, diff, code adapter. Framework-pure, zero runtime deps. | none |
-| [`@design-audit/react`](packages/react) | Config-driven `<DesignAudit>` + `useTokens` hook for React/Tailwind apps. | react, core |
+| [`@agentic-design-audit/core`](packages/core) | The engine: model, color/contrast math, diff, code adapter. Framework-pure, zero runtime deps. | none |
+| [`@agentic-design-audit/react`](packages/react) | Config-driven `<DesignAudit>` + `useTokens` hook for React/Tailwind apps. | react, core |
 | [`skill/`](skill) | A Claude Skill that detects a repo's framework, extracts its tokens to config, mounts the audit route, and verifies. | — |
 
 ## Scope

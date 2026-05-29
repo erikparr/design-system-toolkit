@@ -1,6 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { DesignAudit } from '@design-audit/react'
+import { DesignAudit } from '@agentic-design-audit/react'
 import generated from './design-audit.config.json'
 import { enrichments } from './enrichments.js'
 import './index.css'

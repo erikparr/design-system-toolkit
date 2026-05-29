@@ -1,5 +1,5 @@
 'use client'
-import { contrastRatio, gradeContrast } from '@design-audit/core'
+import { contrastRatio, gradeContrast } from '@agentic-design-audit/core'
 import { Section, SubHeading, ThemeBox, liveValue, cssVarOf, shortId, tokensOfType } from '../lib.jsx'
 
 function groupColors(defs) {

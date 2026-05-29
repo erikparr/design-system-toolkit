@@ -1,4 +1,4 @@
-// @design-audit/core — framework-pure engine.
+// @agentic-design-audit/core — framework-pure engine.
 export * from './model.js'
 export * from './color.js'
 export * from './contrast.js'

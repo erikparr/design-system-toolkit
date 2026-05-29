@@ -8,7 +8,7 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@design-audit/core --workspace=@design-audit/react",
+    "build": "npm run build --workspace=@agentic-design-audit/core --workspace=@agentic-design-audit/react",
     "test": "node --test packages/core/test"
   },
   "devDependencies": {

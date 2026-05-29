@@ -1,7 +1,7 @@
 {
-  "name": "@design-audit/react",
+  "name": "@agentic-design-audit/react",
   "version": "0.1.0",
-  "description": "Config-driven React renderer for design-system audits. Pairs with @design-audit/core.",
+  "description": "Config-driven React renderer for design-system audits. Pairs with @agentic-design-audit/core.",
   "type": "module",
   "main": "dist/index.js",
   "exports": { ".": "./dist/index.js" },
@@ -9,13 +9,13 @@
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
-    "build": "esbuild src/index.js --bundle --format=esm --outfile=dist/index.js --jsx=automatic --external:react --external:react-dom --external:react/jsx-runtime --external:@design-audit/core",
+    "build": "esbuild src/index.js --bundle --format=esm --outfile=dist/index.js --jsx=automatic --external:react --external:react-dom --external:react/jsx-runtime --external:@agentic-design-audit/core",
     "prepack": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18"
   },
   "dependencies": {
-    "@design-audit/core": "0.1.0"
+    "@agentic-design-audit/core": "0.1.0"
   }
 }
