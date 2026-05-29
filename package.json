@@ -1,0 +1,12 @@
+{
+  "name": "design-audit-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Design-system integrity auditor: detect contrast failures and cross-source drift (code, Style Dictionary, Figma, Storybook).",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node --test packages/core/test"
+  }
+}
