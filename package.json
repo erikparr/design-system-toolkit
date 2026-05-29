@@ -8,6 +8,10 @@
     "examples/*"
   ],
   "scripts": {
+    "build": "npm run build --workspace=@design-audit/core --workspace=@design-audit/react",
     "test": "node --test packages/core/test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
   }
 }

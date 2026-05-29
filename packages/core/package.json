@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "description": "Framework-pure engine for design-system auditing: normalized token model, WCAG contrast, drift diff, and a browser code adapter.",
   "type": "module",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "exports": {
-    ".": "./src/index.js",
-    "./adapters/code": "./src/adapters/code.js"
+    ".": "./dist/index.js",
+    "./adapters/code": "./dist/adapters/code.js"
   },
-  "files": ["src"],
+  "files": ["dist", "src"],
   "sideEffects": false,
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild src/index.js src/adapters/code.js --bundle --format=esm --platform=neutral --outdir=dist",
+    "prepack": "npm run build"
+  }
 }
