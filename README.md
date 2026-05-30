@@ -36,7 +36,7 @@ Each phase is one adapter into the same engine:
 
 - **v1 — code adapter** ✅: live token values via `getComputedStyle` (browser) + `cssStatic` (headless), contrast, legacy flags.
 - **v2 — Style Dictionary / DTCG adapter** ✅ (engine): `dtcgToTokenSet` parses `.tokens.json` ($type inheritance, aliases, alpha hex) → `diffTokenSets` reports cross-source drift. Next: a drift report surface/skill workflow.
-- **v3 — Figma adapter**: variables via MCP/REST + Code Connect for component↔code mapping.
+- **v3 — Figma adapter** ✅ (variables): `figmaVariablesToTokenSet` consumes the Figma MCP `get_variable_defs` map → `diffTokenSets`. Live-verified (0 value drift, caught a mis-grouped focus-ring variable). Next: Code Connect for component↔code mapping; file-level variables for coverage.
 - **v4 — Storybook adapter**: which components/variants are actually exercised.
 
 "Drift" requires an **authority policy** (which source is treated as truth) — set per project; the tool reports divergence, it does not assume it.
