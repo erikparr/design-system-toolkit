@@ -15,22 +15,44 @@ function displayValue(token) {
   return token.raw
 }
 
+function identity(id) { return id }
+
 /**
  * Compare candidate TokenSets against an authority TokenSet of the same theme.
+ *
+ * Tokens are matched by a normalized key, not raw id, so that representation
+ * differences between sources don't read as drift:
+ *   - `aliases` maps a candidate id to its authority equivalent (e.g.
+ *     "accent.default" → "accent", "radius.ring" → "color.focus.ring").
+ *   - `normalizeId` is applied to both sides' ids before matching (e.g. collapse
+ *     hyphen vs dot). Original ids are preserved in the findings.
+ * Only genuine value disagreements and truly absent tokens survive.
+ *
  * @param {import('./model.js').TokenSet} authority
  * @param {import('./model.js').TokenSet[]} candidates
+ * @param {object} [opts]
+ * @param {Object<string,string>} [opts.aliases]    candidate id → authority id.
+ * @param {(id:string)=>string} [opts.normalizeId]  applied to both sides for matching.
  * @returns {import('./model.js').Finding[]}
  */
-export function diffTokenSets(authority, candidates) {
+export function diffTokenSets(authority, candidates, opts) {
+  opts = opts || {}
+  var aliases = opts.aliases || {}
+  var norm = opts.normalizeId || identity
+  var authKey = function (tok) { return norm(tok.id) }
+  var candKey = function (tok) { return norm(aliases[tok.id] || tok.id) }
+
   var findings = []
-  var authIndex = indexById(authority)
+  var authByKey = new Map()
+  authority.tokens.forEach(function (tok) { authByKey.set(authKey(tok), tok) })
 
   candidates.forEach(function (candidate) {
-    var candIndex = indexById(candidate)
+    var candByKey = new Map()
+    candidate.tokens.forEach(function (tok) { candByKey.set(candKey(tok), tok) })
 
     // Tokens the authority defines: check presence + value.
     authority.tokens.forEach(function (authTok) {
-      var candTok = candIndex.get(authTok.id)
+      var candTok = candByKey.get(authKey(authTok))
       if (!candTok) {
         findings.push({
           kind: 'missing',
@@ -59,7 +81,7 @@ export function diffTokenSets(authority, candidates) {
 
     // Tokens the candidate has that the authority doesn't.
     candidate.tokens.forEach(function (candTok) {
-      if (!authIndex.has(candTok.id)) {
+      if (!authByKey.has(candKey(candTok))) {
         findings.push({
           kind: 'extra',
           refId: candTok.id,
@@ -74,6 +96,13 @@ export function diffTokenSets(authority, candidates) {
   })
 
   return findings
+}
+
+// Collapses hyphen and dot to a single separator so "bg.card-hover" and
+// "bg.card.hover" match. A ready-made normalizeId for the common CSS-vs-token
+// naming split.
+export function collapseSeparators(id) {
+  return String(id).replace(/[-.]+/g, '.')
 }
 
 function makeSources(authSrc, authVal, candSrc, candVal) {

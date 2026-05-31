@@ -19,6 +19,9 @@ var HELP = [
   '  --primitives <file>     DTCG primitives file, for resolving {aliases}',
   '  --id-prefix <prefix>    Prefix DTCG ids to match the code namespace (default: color)',
   '  --authority <which>     Treat code|tokens as the source of truth (default: code)',
+  '  --alias <from>=<to>     Map a candidate id to its authority equivalent, e.g.',
+  '                          accent.default=color.accent (repeatable; suppresses naming noise)',
+  '  --normalize-separators  Match hyphen vs dot (bg.card-hover ≡ bg.card.hover)',
   '  --json                  Emit findings as JSON',
   '  --strict                Also fail (exit 1) on missing/extra, not just value-mismatch',
   '  -h, --help              Show this help',
@@ -38,6 +41,14 @@ function parseArgs(argv) {
     } else if (a === '--primitives') o.primitivesPath = next()
     else if (a === '--id-prefix') o.idPrefix = next()
     else if (a === '--authority') o.authority = next()
+    else if (a === '--alias') {
+      var ap = next() || ''
+      var aeq = ap.indexOf('=')
+      if (aeq === -1) throw new Error('--alias expects <from>=<to>, got: ' + ap)
+      o.aliases = o.aliases || {}
+      o.aliases[ap.slice(0, aeq)] = ap.slice(aeq + 1)
+    }
+    else if (a === '--normalize-separators') o.normalizeSeparators = true
     else if (a === '--json') o.json = true
     else if (a === '--strict') o.strict = true
     else throw new Error('Unknown option: ' + a)

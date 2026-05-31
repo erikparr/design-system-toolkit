@@ -5,7 +5,7 @@ import { parseColor, toHex } from '../src/color.js'
 import { contrastRatio, gradeContrast } from '../src/contrast.js'
 import { normalizeValue, valuesEqual, parseDimension } from '../src/normalize.js'
 import { makeTokenSet, makeToken } from '../src/model.js'
-import { diffTokenSets, auditContrast } from '../src/diff.js'
+import { diffTokenSets, auditContrast, collapseSeparators } from '../src/diff.js'
 
 test('parseColor handles hex, rgb, rgba', () => {
   assert.deepEqual(parseColor('#1a1a1a'), { r: 26, g: 26, b: 26, a: 1 })
@@ -60,6 +60,37 @@ test('diffTokenSets reports missing, extra, and value-mismatch', () => {
     'missing:color.accent',
     'value-mismatch:color.bg.card',
   ])
+})
+
+test('diff aliases + normalizeId suppress naming noise, keep real drift', () => {
+  var auth = makeTokenSet('code', 'dark', [
+    makeToken({ id: 'color.accent', type: 'color', raw: '#3300ff', value: parseColor('#3300ff'), source: 'code', theme: 'dark' }),
+    makeToken({ id: 'color.bg.card.hover', type: 'color', raw: '#222222', value: parseColor('#222222'), source: 'code', theme: 'dark' }),
+  ])
+  var cand = makeTokenSet('figma', 'dark', [
+    makeToken({ id: 'color.accent.default', type: 'color', raw: '#3300ff', value: parseColor('#3300ff'), source: 'figma', theme: 'dark' }),
+    makeToken({ id: 'color.bg.card-hover', type: 'color', raw: '#222222', value: parseColor('#222222'), source: 'figma', theme: 'dark' }),
+  ])
+
+  // Raw: naming differences read as missing + extra.
+  assert.ok(diffTokenSets(auth, [cand]).length >= 4)
+
+  // Alias (accent.default→accent) + separator-normalize (card-hover≡card.hover) → no findings.
+  var clean = diffTokenSets(auth, [cand], {
+    aliases: { 'color.accent.default': 'color.accent' },
+    normalizeId: collapseSeparators,
+  })
+  assert.equal(clean.length, 0)
+
+  // A genuine value change still surfaces despite the alias.
+  cand.tokens[0].value = parseColor('#4400ff')
+  var realDrift = diffTokenSets(auth, [cand], {
+    aliases: { 'color.accent.default': 'color.accent' },
+    normalizeId: collapseSeparators,
+  })
+  assert.equal(realDrift.length, 1)
+  assert.equal(realDrift[0].kind, 'value-mismatch')
+  assert.equal(realDrift[0].refId, 'color.accent')
 })
 
 test('auditContrast flags failing pairs only', () => {

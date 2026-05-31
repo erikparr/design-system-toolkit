@@ -39,6 +39,8 @@ design-audit drift --css src/app/globals.css \
 
 Exits non-zero on a `value-mismatch` (genuine disagreement); `--strict` also gates on `missing`/`extra` (coverage/naming). `--json` for pipelines, `--authority code|tokens` to choose the source of truth.
 
+Suppress representation noise so only real drift surfaces: `--normalize-separators` matches hyphen vs dot (`bg.card-hover` ≡ `bg.card.hover`), and `--alias <from>=<to>` (repeatable) declares cross-source equivalents (e.g. `--alias color.accent.default=color.accent`).
+
 ## Audit scope & roadmap
 
 **v1 targets React + Tailwind** for the audit *page*; `core` stays framework-pure so the engine widens additively. Each adapter is one source into the same diff engine:
