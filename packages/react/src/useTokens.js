@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { readTokens } from '@agentic-design-audit/core'
+import { readTokens } from '@design-system-toolkit/core'
 
 /**
  * Read live token values (both themes) after mount via the core code adapter.

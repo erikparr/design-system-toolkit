@@ -1,5 +1,5 @@
 'use client'
-import { toHex } from '@agentic-design-audit/core'
+import { toHex } from '@design-system-toolkit/core'
 
 // Shared primitives for audit sections. Styling is inline + CSS-variable based
 // so the renderer carries no Tailwind/styling-framework dependency; it resolves

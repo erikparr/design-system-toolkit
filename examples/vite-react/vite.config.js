@@ -5,5 +5,5 @@ export default defineConfig({
   plugins: [react()],
   // The renderer ships as untranspiled .jsx source; let esbuild transform it
   // even though it lives under node_modules (workspace symlink).
-  optimizeDeps: { include: ['@agentic-design-audit/react', '@agentic-design-audit/core'] },
+  optimizeDeps: { include: ['@design-system-toolkit/react', '@design-system-toolkit/core'] },
 })

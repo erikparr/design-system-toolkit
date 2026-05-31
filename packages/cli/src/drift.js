@@ -3,7 +3,7 @@
 // the core engine. Returns structured results; the CLI formats them.
 
 import { readFileSync } from 'node:fs'
-import { cssToTokenSets, dtcgToTokenSet, diffTokenSets } from '@agentic-design-audit/core'
+import { cssToTokenSets, dtcgToTokenSet, diffTokenSets } from '@design-system-toolkit/core'
 
 function countByKind(findings) {
   var c = {}

@@ -7,7 +7,7 @@ These are SPAs with no file-based routing or server metadata, so mounting is jus
 ```jsx
 // src/routes/StyleGuide.jsx
 import { useEffect } from 'react'
-import { DesignAudit } from '@agentic-design-audit/react'
+import { DesignAudit } from '@design-system-toolkit/react'
 import config from '../design-audit.config.json'
 
 export default function StyleGuide() {

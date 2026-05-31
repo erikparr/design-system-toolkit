@@ -1,5 +1,5 @@
 {
-  "name": "@agentic-design-audit/cli",
+  "name": "@design-system-toolkit/cli",
   "version": "0.1.0",
   "description": "CLI for design-system drift: diff code tokens (CSS) against DTCG / Style Dictionary token files. CI-friendly.",
   "type": "module",
@@ -10,6 +10,6 @@
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "@agentic-design-audit/core": "0.1.0"
+    "@design-system-toolkit/core": "0.1.0"
   }
 }

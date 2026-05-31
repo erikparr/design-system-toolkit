@@ -1,5 +1,5 @@
 {
-  "name": "design-audit-monorepo",
+  "name": "design-system-toolkit",
   "private": true,
   "version": "0.0.0",
   "description": "Design-system integrity auditor: detect contrast failures and cross-source drift (code, Style Dictionary, Figma, Storybook).",
@@ -8,8 +8,8 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@agentic-design-audit/core --workspace=@agentic-design-audit/react",
-    "test": "npm run build --workspace=@agentic-design-audit/core && node --test packages/core/test packages/cli/test"
+    "build": "npm run build --workspace=@design-system-toolkit/core --workspace=@design-system-toolkit/react",
+    "test": "npm run build --workspace=@design-system-toolkit/core && node --test packages/core/test packages/cli/test"
   },
   "devDependencies": {
     "esbuild": "^0.24.0"

@@ -22,7 +22,7 @@ export default function Layout({ children }) { return children }
 `page.js`:
 ```jsx
 'use client'
-import { DesignAudit } from '@agentic-design-audit/react'
+import { DesignAudit } from '@design-system-toolkit/react'
 import config from './design-audit.config.json'
 export default function Page() { return <DesignAudit config={config} title="Style Guide" /> }
 ```
@@ -36,7 +36,7 @@ export default function Page() { return <DesignAudit config={config} title="Styl
 ```jsx
 // pages/style-guide.jsx
 import Head from 'next/head'
-import { DesignAudit } from '@agentic-design-audit/react'
+import { DesignAudit } from '@design-system-toolkit/react'
 import config from '../design-audit.config.json'
 
 export default function StyleGuide() {
