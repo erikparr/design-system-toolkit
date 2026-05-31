@@ -1,11 +1,16 @@
 {
   "name": "@design-system-toolkit/react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Config-driven React renderer for design-system audits. Pairs with @design-system-toolkit/core.",
   "type": "module",
   "main": "dist/index.js",
-  "exports": { ".": "./dist/index.js" },
-  "files": ["dist", "src"],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
@@ -16,6 +21,13 @@
     "react": ">=18"
   },
   "dependencies": {
-    "@design-system-toolkit/core": "0.1.0"
-  }
+    "@design-system-toolkit/core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikparr/design-system-toolkit.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/erikparr/design-system-toolkit#readme",
+  "bugs": "https://github.com/erikparr/design-system-toolkit/issues"
 }

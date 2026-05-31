@@ -1,15 +1,28 @@
 {
   "name": "@design-system-toolkit/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI for design-system drift: diff code tokens (CSS) against DTCG / Style Dictionary token files. CI-friendly.",
   "type": "module",
-  "bin": { "design-audit": "src/cli.js" },
+  "bin": {
+    "design-audit": "src/cli.js"
+  },
   "main": "src/drift.js",
-  "exports": { ".": "./src/drift.js" },
-  "files": ["src"],
+  "exports": {
+    ".": "./src/drift.js"
+  },
+  "files": [
+    "src"
+  ],
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "@design-system-toolkit/core": "0.1.0"
-  }
+    "@design-system-toolkit/core": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikparr/design-system-toolkit.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/erikparr/design-system-toolkit#readme",
+  "bugs": "https://github.com/erikparr/design-system-toolkit/issues"
 }

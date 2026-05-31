@@ -1,6 +1,6 @@
 {
   "name": "@design-system-toolkit/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Framework-pure engine for design-system auditing: normalized token model, WCAG contrast, drift diff, and a browser code adapter.",
   "type": "module",
   "main": "dist/index.js",
@@ -11,11 +11,21 @@
     "./adapters/dtcg": "./dist/adapters/dtcg.js",
     "./adapters/figmaVariables": "./dist/adapters/figmaVariables.js"
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "sideEffects": false,
   "license": "MIT",
   "scripts": {
     "build": "esbuild src/index.js src/adapters/code.js src/adapters/cssStatic.js src/adapters/dtcg.js src/adapters/figmaVariables.js --bundle --format=esm --platform=neutral --outdir=dist",
     "prepack": "npm run build"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikparr/design-system-toolkit.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/erikparr/design-system-toolkit#readme",
+  "bugs": "https://github.com/erikparr/design-system-toolkit/issues"
 }
