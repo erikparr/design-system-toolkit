@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Section, SubHeading, ThemeBox, liveValue, tokensOfType } from '../lib.jsx'
+import { Section, SubHeading, ThemeBox, chromeFor, NEUTRAL, liveValue, tokensOfType } from '../lib.jsx'
 
 function splitDimensions(defs) {
   var radii = []
@@ -34,7 +34,7 @@ export function ScalesSection(props) {
                 <div key={d.id} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <span style={{ width: '120px', fontFamily: 'monospace', fontSize: '12px', opacity: 0.6, flexShrink: 0 }}>{d.id}</span>
                   <span style={{ width: '64px', fontFamily: 'monospace', fontSize: '11px', opacity: 0.6, flexShrink: 0 }}>{liveValue(byTheme, firstTheme, d.id)}</span>
-                  <div style={{ height: '16px', width: 'var(' + d.cssVar + ')', backgroundColor: 'var(--color-accent, #888)', borderRadius: '2px' }} />
+                  <div style={{ height: '16px', width: 'var(' + d.cssVar + ')', backgroundColor: NEUTRAL.accent, borderRadius: '2px' }} />
                 </div>
               )
             })}
@@ -49,7 +49,7 @@ export function ScalesSection(props) {
             {dims.radii.map(function (d) {
               return (
                 <div key={d.id} style={{ textAlign: 'center' }}>
-                  <div style={{ width: '72px', height: '72px', border: '1px solid var(--color-border-subtle, #ddd)', backgroundColor: 'var(--color-bg-card, #eee)', borderRadius: 'var(' + d.cssVar + ')' }} />
+                  <div style={{ width: '72px', height: '72px', border: '1px solid ' + NEUTRAL.border, backgroundColor: NEUTRAL.surface, borderRadius: 'var(' + d.cssVar + ')' }} />
                   <div style={{ fontFamily: 'monospace', fontSize: '12px', marginTop: '8px' }}>{d.id}</div>
                   <div style={{ fontFamily: 'monospace', fontSize: '11px', opacity: 0.6 }}>{liveValue(byTheme, firstTheme, d.id)}</div>
                 </div>
@@ -65,12 +65,12 @@ export function ScalesSection(props) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
             {config.themeScopes.map(function (scope) {
               return (
-                <ThemeBox key={scope.name} scope={scope} style={{ backgroundColor: 'var(--color-bg-elevated, #fafafa)' }}>
+                <ThemeBox key={scope.name} scope={scope}>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                     {shadows.map(function (d) {
                       return (
                         <div key={d.id} style={{ textAlign: 'center' }}>
-                          <div style={{ width: '64px', height: '64px', backgroundColor: 'var(--color-bg-card, #fff)', borderRadius: '6px', boxShadow: 'var(' + d.cssVar + ')' }} />
+                          <div style={{ width: '64px', height: '64px', backgroundColor: chromeFor(scope).surface, borderRadius: '6px', boxShadow: 'var(' + d.cssVar + ')' }} />
                           <div style={{ fontFamily: 'monospace', fontSize: '11px', marginTop: '10px' }}>{d.id}</div>
                         </div>
                       )
@@ -101,8 +101,8 @@ function Transitions(props) {
             <div key={d.id} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <span style={{ width: '140px', fontFamily: 'monospace', fontSize: '12px', opacity: 0.6, flexShrink: 0 }}>{d.id}</span>
               <span style={{ width: '64px', fontFamily: 'monospace', fontSize: '11px', opacity: 0.6, flexShrink: 0 }}>{liveValue(props.byTheme, props.firstTheme, d.id)}</span>
-              <div style={{ height: '16px', flex: 1, overflow: 'hidden', borderRadius: '4px', backgroundColor: 'var(--color-bg-card, #eee)' }}>
-                <div style={{ height: '100%', width: hovered ? '100%' : '8%', backgroundColor: 'var(--color-accent, #888)', transition: 'width var(' + d.cssVar + ')' }} />
+              <div style={{ height: '16px', flex: 1, overflow: 'hidden', borderRadius: '4px', backgroundColor: NEUTRAL.surface }}>
+                <div style={{ height: '100%', width: hovered ? '100%' : '8%', backgroundColor: NEUTRAL.accent, transition: 'width var(' + d.cssVar + ')' }} />
               </div>
             </div>
           )

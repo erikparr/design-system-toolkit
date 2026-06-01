@@ -1,5 +1,5 @@
 'use client'
-import { Section, SubHeading, ThemeBox, Badge } from '../lib.jsx'
+import { Section, SubHeading, ThemeBox, Badge, NEUTRAL } from '../lib.jsx'
 
 // Component samples are project-specific class names, so they come from
 // optional `config.components`. Each item renders as the given tag with the
@@ -49,8 +49,8 @@ export function ComponentsSection(props) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '12px' }}>
             {legacy.map(function (c) {
               return (
-                <div key={c.className} style={{ border: '1px solid var(--color-border-subtle, #ddd)', borderRadius: '8px', padding: '8px' }}>
-                  <div style={{ height: '44px', borderRadius: '4px', backgroundColor: c.value, border: '1px solid var(--color-border-subtle, #ddd)' }} />
+                <div key={c.className} style={{ border: '1px solid ' + NEUTRAL.border, borderRadius: '8px', padding: '8px' }}>
+                  <div style={{ height: '44px', borderRadius: '4px', backgroundColor: c.value, border: '1px solid ' + NEUTRAL.border }} />
                   <div style={{ fontFamily: 'monospace', fontSize: '11px', marginTop: '6px' }}>{c.className}</div>
                   <div style={{ fontFamily: 'monospace', fontSize: '10px', opacity: 0.55 }}>{c.value}</div>
                   {c.note ? <div style={{ fontSize: '10px', lineHeight: 1.35, opacity: 0.7, marginTop: '4px' }}>{c.note}</div> : null}

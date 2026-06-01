@@ -1,6 +1,6 @@
 {
   "name": "@design-system-toolkit/react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Config-driven React renderer for design-system audits. Pairs with @design-system-toolkit/core.",
   "type": "module",
   "main": "dist/index.js",

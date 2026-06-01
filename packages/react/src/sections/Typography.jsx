@@ -1,5 +1,5 @@
 'use client'
-import { Section, SubHeading, liveValue, tokensOfType } from '../lib.jsx'
+import { Section, SubHeading, NEUTRAL, liveValue, tokensOfType } from '../lib.jsx'
 
 var SAMPLE = 'The quick brown fox — 0123456789'
 
@@ -21,7 +21,7 @@ export function TypographySection(props) {
           <div style={{ display: 'grid', gap: '12px' }}>
             {families.map(function (def) {
               return (
-                <div key={def.id} style={{ border: '1px solid var(--color-border-subtle, #ddd)', borderRadius: '8px', padding: '14px' }}>
+                <div key={def.id} style={{ border: '1px solid ' + NEUTRAL.border, borderRadius: '8px', padding: '14px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                     <span style={{ fontFamily: 'monospace', fontSize: '12px' }}>{def.id}</span>
                     <span style={{ fontFamily: 'monospace', fontSize: '11px', opacity: 0.6 }}>{liveValue(props.byTheme, config.themeScopes[0].name, def.id)}</span>
@@ -40,7 +40,7 @@ export function TypographySection(props) {
           <div style={{ display: 'grid', gap: '10px' }}>
             {typo.scale.map(function (step) {
               return (
-                <div key={step.label} style={{ display: 'flex', alignItems: 'baseline', gap: '16px', borderBottom: '1px solid var(--color-border-subtle, #ddd)', paddingBottom: '8px' }}>
+                <div key={step.label} style={{ display: 'flex', alignItems: 'baseline', gap: '16px', borderBottom: '1px solid ' + NEUTRAL.border, paddingBottom: '8px' }}>
                   <span style={{ width: '48px', fontFamily: 'monospace', fontSize: '12px', opacity: 0.6, flexShrink: 0 }}>{step.label}</span>
                   <span style={{ width: '80px', fontFamily: 'monospace', fontSize: '11px', opacity: 0.6, flexShrink: 0 }}>{step.value}</span>
                   <span style={{ fontSize: step.value, overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{SAMPLE}</span>

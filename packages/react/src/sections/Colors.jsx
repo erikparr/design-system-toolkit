@@ -1,6 +1,6 @@
 'use client'
 import { contrastRatio, gradeContrast } from '@design-system-toolkit/core'
-import { Section, SubHeading, ThemeBox, liveValue, cssVarOf, shortId, tokensOfType } from '../lib.jsx'
+import { Section, SubHeading, ThemeBox, chromeFor, liveValue, cssVarOf, shortId, tokensOfType } from '../lib.jsx'
 
 function groupColors(defs) {
   var groups = []
@@ -35,7 +35,7 @@ export function ColorsSection(props) {
                     {config.themeScopes.map(function (scope) {
                       return (
                         <ThemeBox key={scope.name} scope={scope} style={{ padding: '8px' }} label={false}>
-                          <div style={{ height: '36px', borderRadius: '4px', backgroundColor: 'var(' + def.cssVar + ')', border: '1px solid var(--color-border-strong, #888)' }} />
+                          <div style={{ height: '36px', borderRadius: '4px', backgroundColor: 'var(' + def.cssVar + ')', border: '1px solid ' + chromeFor(scope).border }} />
                           <div style={{ fontFamily: 'monospace', fontSize: '11px', opacity: 0.7, marginTop: '6px' }}>
                             {liveValue(byTheme, scope.name, def.id)}
                           </div>
@@ -95,7 +95,7 @@ function Matrix(props) {
                   var grade = gradeContrast(ratio)
                   return (
                     <td key={s} style={{ padding: '2px' }}>
-                      <div style={{ borderRadius: '4px', padding: '6px', textAlign: 'center', backgroundColor: 'var(' + cssVarOf(props.config, s) + ')', color: 'var(' + cssVarOf(props.config, t) + ')', border: '1px solid var(--color-border-subtle, #ddd)' }}>
+                      <div style={{ borderRadius: '4px', padding: '6px', textAlign: 'center', backgroundColor: 'var(' + cssVarOf(props.config, s) + ')', color: 'var(' + cssVarOf(props.config, t) + ')', border: '1px solid ' + chromeFor(props.scope).border }}>
                         <div style={{ fontWeight: 600 }}>Aa</div>
                         <div style={{ fontSize: '10px', opacity: 0.9, marginTop: '3px' }}>{grade.ratio != null ? grade.ratio.toFixed(2) : '—'}</div>
                         <div style={{ fontSize: '10px', marginTop: '2px', fontWeight: 700, color: grade.pass ? undefined : '#dc2626' }}>{grade.label}</div>
