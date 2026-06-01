@@ -62,13 +62,26 @@ function defaultIdFromVar(cssVar) {
   return cssVar.replace(/^--/, '').replace(/-/g, '.')
 }
 
-function inferType(cssVar) {
+// Colors named without a "--color-" prefix (e.g. --bg-primary) are common, so
+// fall back to sniffing the value when the name doesn't reveal the type. Only
+// claim 'color' for forms the parser understands (hex / rgb), so a parseable
+// value is compared structurally; anything else stays 'other' (exact-string
+// compared by the diff engine).
+function looksLikeParseableColor(value) {
+  if (typeof value !== 'string') return false
+  var v = value.trim().toLowerCase()
+  return v.charAt(0) === '#' || v.indexOf('rgb') === 0
+}
+
+function inferType(cssVar, value) {
   var n = cssVar.toLowerCase()
   if (n.startsWith('--color')) return 'color'
   if (n.startsWith('--space') || n.startsWith('--radius')) return 'dimension'
   if (n.startsWith('--shadow')) return 'shadow'
   if (n.startsWith('--transition')) return 'duration'
   if (n.startsWith('--font')) return 'fontFamily'
+  if (looksLikeParseableColor(value)) return 'color'
+  if (typeof value === 'string' && /^-?[\d.]+(px|rem|em)$/.test(value.trim())) return 'dimension'
   return 'other'
 }
 
@@ -105,8 +118,8 @@ export function cssToTokenSets(cssText, options) {
   return themes.map(function (t) {
     var decls = perTheme[t.name]
     var tokens = Object.keys(decls).map(function (cssVar) {
-      var type = inferType(cssVar)
       var raw = decls[cssVar]
+      var type = inferType(cssVar, raw)
       return makeToken({
         id: idFromVar(cssVar),
         type: type,

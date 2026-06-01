@@ -83,6 +83,7 @@ test('diff aliases + normalizeId suppress naming noise, keep real drift', () => 
   assert.equal(clean.length, 0)
 
   // A genuine value change still surfaces despite the alias.
+  cand.tokens[0].raw = '#4400ff'
   cand.tokens[0].value = parseColor('#4400ff')
   var realDrift = diffTokenSets(auth, [cand], {
     aliases: { 'color.accent.default': 'color.accent' },

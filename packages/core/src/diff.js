@@ -5,7 +5,7 @@
 // TokenSets in the same shape.
 
 import { indexById } from './model.js'
-import { valuesEqual } from './normalize.js'
+import { valuesEqual, normalizeValue } from './normalize.js'
 import { toHex } from './color.js'
 import { contrastRatio, gradeContrast } from './contrast.js'
 
@@ -16,6 +16,30 @@ function displayValue(token) {
 }
 
 function identity(id) { return id }
+
+// Pick one type to compare two tokens under, preferring a specific type over
+// 'other' when adapters disagree (e.g. the CSS adapter guessed 'other' from a
+// non-"--color-" var name while DTCG/Figma declared 'color').
+function reconcileType(a, b) {
+  if (a === b) return a
+  if (a === 'other') return b
+  if (b === 'other') return a
+  return a
+}
+
+// Compare two tokens' VALUES robustly, even when their adapters inferred
+// different types. Re-normalizes both raw strings under one reconciled type, so
+// a color stored as {r,g,b,a} on one side and "#050709" on the other still
+// matches; falls back to an exact raw comparison when a value can't be parsed
+// (e.g. oklch(), which the color parser doesn't model). Guarantees the engine
+// never reports drift for two identical values.
+function tokensValueEqual(a, b) {
+  var type = reconcileType(a.type, b.type)
+  var na = normalizeValue(type, a.raw)
+  var nb = normalizeValue(type, b.raw)
+  if (na == null || nb == null) return String(a.raw).trim() === String(b.raw).trim()
+  return valuesEqual(type, na, nb)
+}
 
 /**
  * Compare candidate TokenSets against an authority TokenSet of the same theme.
@@ -65,7 +89,7 @@ export function diffTokenSets(authority, candidates, opts) {
         })
         return
       }
-      if (!valuesEqual(authTok.type, authTok.value, candTok.value)) {
+      if (!tokensValueEqual(authTok, candTok)) {
         findings.push({
           kind: 'value-mismatch',
           refId: authTok.id,

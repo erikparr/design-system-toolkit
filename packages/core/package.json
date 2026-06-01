@@ -1,6 +1,6 @@
 {
   "name": "@design-system-toolkit/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Framework-pure engine for design-system auditing: normalized token model, WCAG contrast, drift diff, and a browser code adapter.",
   "type": "module",
   "main": "dist/index.js",

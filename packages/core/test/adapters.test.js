@@ -6,6 +6,36 @@ import { dtcgToTokenSet } from '../src/adapters/dtcg.js'
 import { cssToTokenSets } from '../src/adapters/cssStatic.js'
 import { diffTokenSets } from '../src/diff.js'
 
+test('regression: no false drift when adapters infer different types (--bg-primary)', () => {
+  // CSS names color vars WITHOUT a --color- prefix; previously the CSS adapter
+  // typed them 'other' (raw string) while DTCG typed them 'color' (object),
+  // producing a value-mismatch for every identical token.
+  var css = ':root, .dark { --bg-primary: #050709; --text-primary: #f1f5f9; }'
+  var code = cssToTokenSets(css).find((s) => s.theme === 'dark')
+  var dtcg = dtcgToTokenSet(
+    { bg: { $type: 'color', primary: { $value: '#050709' } }, text: { $type: 'color', primary: { $value: '#f1f5f9' } } },
+    { theme: 'dark', idPrefix: '' }
+  )
+
+  assert.deepEqual(diffTokenSets(code, [dtcg]), []) // identical → no findings
+  assert.equal(code.tokens.find((t) => t.id === 'bg.primary').type, 'color') // sniffed from value
+
+  // A genuine difference still surfaces.
+  var changed = dtcgToTokenSet({ bg: { $type: 'color', primary: { $value: '#112233' } } }, { theme: 'dark', idPrefix: '' })
+  var vm = diffTokenSets(code, [changed]).filter((f) => f.kind === 'value-mismatch')
+  assert.equal(vm.length, 1)
+  assert.equal(vm[0].refId, 'bg.primary')
+})
+
+test('unparseable colors (oklch) compared by exact raw string', () => {
+  var css = ':root, .dark { --bg-primary: oklch(0.2 0.03 250); }'
+  var code = cssToTokenSets(css).find((s) => s.theme === 'dark')
+  var same = dtcgToTokenSet({ bg: { $type: 'color', primary: { $value: 'oklch(0.2 0.03 250)' } } }, { theme: 'dark', idPrefix: '' })
+  assert.deepEqual(diffTokenSets(code, [same]), [])
+  var diff = dtcgToTokenSet({ bg: { $type: 'color', primary: { $value: 'oklch(0.9 0.03 250)' } } }, { theme: 'dark', idPrefix: '' })
+  assert.equal(diffTokenSets(code, [diff]).filter((f) => f.kind === 'value-mismatch').length, 1)
+})
+
 test('parseColor handles 4- and 8-digit hex (alpha)', () => {
   assert.equal(parseColor('#000000cc').a, 204 / 255)
   assert.deepEqual(parseColor('#0000'), { r: 0, g: 0, b: 0, a: 0 })

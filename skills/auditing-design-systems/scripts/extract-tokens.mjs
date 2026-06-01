@@ -51,7 +51,7 @@ var names = Array.from(new Set(Object.keys(darkVars).concat(Object.keys(lightVar
 names.sort()
 
 var tokenDefs = names.map(function (cssVar) {
-  var type = inferType(cssVar)
+  var type = inferType(cssVar, darkVars[cssVar] || lightVars[cssVar])
   return { id: toId(cssVar), cssVar: cssVar, type: type, group: toGroup(cssVar) }
 })
 
@@ -135,13 +135,20 @@ function toGroup(cssVar) {
   return parts[0]
 }
 
-function inferType(cssVar) {
+function inferType(cssVar, value) {
   var n = cssVar.toLowerCase()
   if (n.startsWith('--color')) return 'color'
   if (n.startsWith('--space') || n.startsWith('--radius')) return 'dimension'
   if (n.startsWith('--shadow')) return 'shadow'
   if (n.startsWith('--transition')) return 'duration'
   if (n.startsWith('--font')) return 'fontFamily'
+  // Fall back to sniffing the value for colors named without a --color- prefix
+  // (e.g. --bg-primary), so they still render as color swatches on the page.
+  if (typeof value === 'string') {
+    var v = value.trim().toLowerCase()
+    if (v.charAt(0) === '#' || v.indexOf('rgb') === 0 || v.indexOf('hsl') === 0 || v.indexOf('oklch') === 0) return 'color'
+    if (/^-?[\d.]+(px|rem|em)$/.test(v)) return 'dimension'
+  }
   return 'other'
 }
 
